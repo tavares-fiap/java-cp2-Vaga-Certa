@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/D:/Faculdade/Java/CP2/CP2/src/main/Main.java</file>
+            <file>file:/D:/Faculdade/Java/CP2/CP2/src/View/Splash_GUI.java</file>
+            <file>file:/D:/Faculdade/Java/CP2/CP2/src/View/MainMenu_GUI.java</file>
+            <file>file:/D:/Faculdade/Java/CP2/CP2/src/Controller/Connect_DB.java</file>
+            <file>file:/D:/Faculdade/Java/CP2/CP2/src/Model/Funcs_DAO.java</file>
+            <file>file:/D:/Faculdade/Java/CP2/CP2/src/Model/CRUD_DAO.java</file>
+            <file>file:/D:/Faculdade/Java/CP2/CP2/src/View/SetUp_GUI.java</file>
+            <file>file:/D:/Faculdade/Java/CP2/CP2/src/Image/BG.png</file>
+            <file>file:/D:/Faculdade/Java/CP2/CP2/src/Model/Login_DAO.java</file>
+            <file>file:/D:/Faculdade/Java/CP2/CP2/src/Image/SplashScreen.png</file>
+        </group>
+    </open-files>
+</project-private>
