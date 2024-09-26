@@ -96,4 +96,5 @@ public class Funcs_DAO {
             Logger.getLogger(MainMenu_GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
 }

@@ -413,7 +413,8 @@ public class MainMenu_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_send_btnActionPerformed
 
     private void consult_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consult_btnActionPerformed
-        // TODO add your handling code here:
+        System.out.println("A ser consultado: " + licensePlate_txt1.getText());
+        Model.CRUD_DAO.read(licensePlate_txt1.getText());
     }//GEN-LAST:event_consult_btnActionPerformed
 
     private void update_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_btnActionPerformed
@@ -425,7 +426,8 @@ public class MainMenu_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_clean_btnActionPerformed
 
     private void delete_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_btnActionPerformed
-        // TODO add your handling code here:
+        System.out.println("A ser deletado: " + licensePlate_txt1.getText());
+        Model.CRUD_DAO.delete(licensePlate_txt1.getText());
     }//GEN-LAST:event_delete_btnActionPerformed
 
     private void closeTicket_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeTicket_btnActionPerformed
