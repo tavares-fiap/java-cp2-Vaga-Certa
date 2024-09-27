@@ -1,3 +1,5 @@
+PEDRO HENRIQUE PEDROSA TAVARES RM97877, GUILHERME ROCHA BIANCHINI 97974, THIAGO JARDIM DE OLIVEIRA RM551624
+
 Software deve receber placa do carro, marca, modelo, (cor também seria de grande ajuda), horário de entrada e armazenar essas informações no banco de dados enquanto o carro estiver estacionado.
 Software deve ter a opção FECHAR TICKET (para quando o dono for retirar o veiculo), onde sera solicitado o horário de saída do veiculo e calculado o valor total a pagar considerando R$15,00 o preço da hora, assim, o proprietário poderá imprimir a notinha diretamente.
 Dessa forma, acredito que o problema de procurar a copia do boleto não atrasara mais o processo no estacionamento de Oswaldo.
@@ -5,3 +7,7 @@ Dessa forma, acredito que o problema de procurar a copia do boleto não atrasara
 VEHICLE - LISCENSE PLATE*, BRAND, MODEL, COLOR, ENTRY TIME
 
 link video: https://www.youtube.com/watch?v=Hy_yS9zgyNA
+
+LOGIN: admin
+PASSWORD: admin
+
