@@ -5,6 +5,9 @@
  */
 package View;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  *
  * @author sapat
@@ -34,6 +37,7 @@ public class MainMenu_GUI extends javax.swing.JFrame {
         vehicleList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : vehicleQuery.getResultList();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
+        currentTime_btn1 = new javax.swing.JButton();
         clean_btn2 = new javax.swing.JButton();
         exit_btn2 = new javax.swing.JButton();
         closeTicket_btn = new javax.swing.JButton();
@@ -66,6 +70,7 @@ public class MainMenu_GUI extends javax.swing.JFrame {
         entryTime_txt1 = new javax.swing.JTextField();
         bg_lbl1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        currentTime_btn = new javax.swing.JButton();
         clean_btn1 = new javax.swing.JButton();
         exit_btn3 = new javax.swing.JButton();
         send_btn = new javax.swing.JButton();
@@ -85,6 +90,16 @@ public class MainMenu_GUI extends javax.swing.JFrame {
         setUndecorated(true);
 
         jPanel3.setLayout(null);
+
+        currentTime_btn1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        currentTime_btn1.setText("SISTEMA");
+        currentTime_btn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                currentTime_btn1ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(currentTime_btn1);
+        currentTime_btn1.setBounds(380, 120, 100, 30);
 
         clean_btn2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         clean_btn2.setText("LIMPAR");
@@ -156,7 +171,7 @@ public class MainMenu_GUI extends javax.swing.JFrame {
 
         exitTime_txt.setText("HORARIO DE SAIDA DO VEICULO (00:00:00)");
         jPanel3.add(exitTime_txt);
-        exitTime_txt.setBounds(120, 120, 360, 30);
+        exitTime_txt.setBounds(120, 120, 250, 30);
 
         exitTime_lbl1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         exitTime_lbl1.setForeground(new java.awt.Color(255, 255, 255));
@@ -307,6 +322,16 @@ public class MainMenu_GUI extends javax.swing.JFrame {
 
         jPanel2.setLayout(null);
 
+        currentTime_btn.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        currentTime_btn.setText("SISTEMA");
+        currentTime_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                currentTime_btnActionPerformed(evt);
+            }
+        });
+        jPanel2.add(currentTime_btn);
+        currentTime_btn.setBounds(370, 290, 100, 30);
+
         clean_btn1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         clean_btn1.setText("LIMPAR");
         clean_btn1.addActionListener(new java.awt.event.ActionListener() {
@@ -315,7 +340,7 @@ public class MainMenu_GUI extends javax.swing.JFrame {
             }
         });
         jPanel2.add(clean_btn1);
-        clean_btn1.setBounds(360, 350, 110, 40);
+        clean_btn1.setBounds(360, 370, 110, 40);
 
         exit_btn3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         exit_btn3.setText("SAIR");
@@ -335,62 +360,67 @@ public class MainMenu_GUI extends javax.swing.JFrame {
             }
         });
         jPanel2.add(send_btn);
-        send_btn.setBounds(160, 350, 170, 40);
+        send_btn.setBounds(160, 370, 170, 40);
 
         entryTime_lbl2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         entryTime_lbl2.setForeground(new java.awt.Color(255, 255, 255));
         entryTime_lbl2.setText("ENTRADA:");
         entryTime_lbl2.setToolTipText("");
         jPanel2.add(entryTime_lbl2);
-        entryTime_lbl2.setBounds(30, 290, 110, 30);
+        entryTime_lbl2.setBounds(10, 290, 110, 30);
 
         color_lbl1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         color_lbl1.setForeground(new java.awt.Color(255, 255, 255));
         color_lbl1.setText("COR:");
         color_lbl1.setToolTipText("");
         jPanel2.add(color_lbl1);
-        color_lbl1.setBounds(30, 240, 80, 30);
+        color_lbl1.setBounds(10, 240, 80, 30);
 
         model_lbl1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         model_lbl1.setForeground(new java.awt.Color(255, 255, 255));
         model_lbl1.setText("MODELO:");
         model_lbl1.setToolTipText("");
         jPanel2.add(model_lbl1);
-        model_lbl1.setBounds(30, 190, 100, 30);
+        model_lbl1.setBounds(10, 190, 100, 30);
 
         brand_lbl1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         brand_lbl1.setForeground(new java.awt.Color(255, 255, 255));
         brand_lbl1.setText("MARCA:");
         brand_lbl1.setToolTipText("");
         jPanel2.add(brand_lbl1);
-        brand_lbl1.setBounds(30, 140, 80, 30);
+        brand_lbl1.setBounds(10, 140, 80, 30);
 
         licensePlate_lbl2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         licensePlate_lbl2.setForeground(new java.awt.Color(255, 255, 255));
         licensePlate_lbl2.setText("PLACA:");
         licensePlate_lbl2.setToolTipText("");
         jPanel2.add(licensePlate_lbl2);
-        licensePlate_lbl2.setBounds(30, 90, 80, 30);
+        licensePlate_lbl2.setBounds(10, 90, 80, 30);
 
         entryTime_txt.setText("HORARIO DE ENTRADA DO VEICULO (00:00:00)");
+        entryTime_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                entryTime_txtActionPerformed(evt);
+            }
+        });
         jPanel2.add(entryTime_txt);
-        entryTime_txt.setBounds(130, 290, 330, 30);
+        entryTime_txt.setBounds(110, 290, 250, 30);
 
         color_txt.setText("INSIRA A COR DO VEICULO");
         jPanel2.add(color_txt);
-        color_txt.setBounds(130, 240, 330, 30);
+        color_txt.setBounds(110, 240, 360, 30);
 
         model_txt.setText("INSIRA O MODELO DO VEICULO");
         jPanel2.add(model_txt);
-        model_txt.setBounds(130, 190, 330, 30);
+        model_txt.setBounds(110, 190, 360, 30);
 
         brand_txt.setText("INSIRA A MARCA DO VEICULO");
         jPanel2.add(brand_txt);
-        brand_txt.setBounds(130, 140, 330, 30);
+        brand_txt.setBounds(110, 140, 360, 30);
 
         licensePlate_txt.setText("INSIRA PLACA DO VEICULO (ABC1D234 ou ABC1234)");
         jPanel2.add(licensePlate_txt);
-        licensePlate_txt.setBounds(130, 90, 330, 30);
+        licensePlate_txt.setBounds(110, 90, 360, 30);
 
         bg_lbl2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/BG.png"))); // NOI18N
         jPanel2.add(bg_lbl2);
@@ -476,6 +506,24 @@ public class MainMenu_GUI extends javax.swing.JFrame {
         Model.Funcs_DAO.cleanCloseTicketFields();
     }//GEN-LAST:event_clean_btn2ActionPerformed
 
+    private void currentTime_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_currentTime_btnActionPerformed
+        LocalTime currentTime = LocalTime.now();
+        String formattedTime = currentTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+        System.out.println(formattedTime);
+        entryTime_txt.setText(formattedTime);
+    }//GEN-LAST:event_currentTime_btnActionPerformed
+
+    private void entryTime_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entryTime_txtActionPerformed
+        
+    }//GEN-LAST:event_entryTime_txtActionPerformed
+
+    private void currentTime_btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_currentTime_btn1ActionPerformed
+        LocalTime currentTime = LocalTime.now();
+        String formattedTime = currentTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+        System.out.println(formattedTime);
+        exitTime_txt.setText(formattedTime);
+    }//GEN-LAST:event_currentTime_btn1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -529,6 +577,8 @@ public class MainMenu_GUI extends javax.swing.JFrame {
     public static javax.swing.JTextField color_txt;
     public static javax.swing.JTextField color_txt1;
     public static javax.swing.JButton consult_btn;
+    public static javax.swing.JButton currentTime_btn;
+    public static javax.swing.JButton currentTime_btn1;
     public static javax.swing.JButton delete_btn;
     private javax.persistence.EntityManager entityManager;
     private javax.swing.JLabel entryTime_lbl;
