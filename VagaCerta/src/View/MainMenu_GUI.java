@@ -37,7 +37,7 @@ public class MainMenu_GUI extends javax.swing.JFrame {
         vehicleList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : vehicleQuery.getResultList();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
-        currentTime_btn1 = new javax.swing.JButton();
+        currentTime_btn2 = new javax.swing.JButton();
         clean_btn2 = new javax.swing.JButton();
         exit_btn2 = new javax.swing.JButton();
         closeTicket_btn = new javax.swing.JButton();
@@ -51,6 +51,7 @@ public class MainMenu_GUI extends javax.swing.JFrame {
         exitTime_lbl1 = new javax.swing.JLabel();
         bg_lbl3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        currentTime_btn1 = new javax.swing.JButton();
         exit_btn1 = new javax.swing.JButton();
         clean_btn = new javax.swing.JButton();
         update_btn = new javax.swing.JButton();
@@ -91,15 +92,15 @@ public class MainMenu_GUI extends javax.swing.JFrame {
 
         jPanel3.setLayout(null);
 
-        currentTime_btn1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        currentTime_btn1.setText("SISTEMA");
-        currentTime_btn1.addActionListener(new java.awt.event.ActionListener() {
+        currentTime_btn2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        currentTime_btn2.setText("SISTEMA");
+        currentTime_btn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                currentTime_btn1ActionPerformed(evt);
+                currentTime_btn2ActionPerformed(evt);
             }
         });
-        jPanel3.add(currentTime_btn1);
-        currentTime_btn1.setBounds(380, 120, 100, 30);
+        jPanel3.add(currentTime_btn2);
+        currentTime_btn2.setBounds(380, 120, 100, 30);
 
         clean_btn2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         clean_btn2.setText("LIMPAR");
@@ -187,6 +188,16 @@ public class MainMenu_GUI extends javax.swing.JFrame {
         jTabbedPane1.addTab("FECHAR TICKET", jPanel3);
 
         jPanel1.setLayout(null);
+
+        currentTime_btn1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        currentTime_btn1.setText("SISTEMA");
+        currentTime_btn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                currentTime_btn1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(currentTime_btn1);
+        currentTime_btn1.setBounds(380, 350, 100, 30);
 
         exit_btn1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         exit_btn1.setText("SAIR");
@@ -312,7 +323,7 @@ public class MainMenu_GUI extends javax.swing.JFrame {
 
         entryTime_txt1.setText("HORARIO DE ENTRADA (00:00:00)");
         jPanel1.add(entryTime_txt1);
-        entryTime_txt1.setBounds(120, 350, 360, 30);
+        entryTime_txt1.setBounds(120, 350, 250, 30);
 
         bg_lbl1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/bg3.png"))); // NOI18N
         jPanel1.add(bg_lbl1);
@@ -509,7 +520,6 @@ public class MainMenu_GUI extends javax.swing.JFrame {
     private void currentTime_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_currentTime_btnActionPerformed
         LocalTime currentTime = LocalTime.now();
         String formattedTime = currentTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
-        System.out.println(formattedTime);
         entryTime_txt.setText(formattedTime);
     }//GEN-LAST:event_currentTime_btnActionPerformed
 
@@ -517,11 +527,16 @@ public class MainMenu_GUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_entryTime_txtActionPerformed
 
+    private void currentTime_btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_currentTime_btn2ActionPerformed
+        LocalTime currentTime = LocalTime.now();
+        String formattedTime = currentTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+        exitTime_txt.setText(formattedTime);
+    }//GEN-LAST:event_currentTime_btn2ActionPerformed
+
     private void currentTime_btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_currentTime_btn1ActionPerformed
         LocalTime currentTime = LocalTime.now();
         String formattedTime = currentTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
-        System.out.println(formattedTime);
-        exitTime_txt.setText(formattedTime);
+        entryTime_txt1.setText(formattedTime);
     }//GEN-LAST:event_currentTime_btn1ActionPerformed
 
     /**
@@ -579,6 +594,7 @@ public class MainMenu_GUI extends javax.swing.JFrame {
     public static javax.swing.JButton consult_btn;
     public static javax.swing.JButton currentTime_btn;
     public static javax.swing.JButton currentTime_btn1;
+    public static javax.swing.JButton currentTime_btn2;
     public static javax.swing.JButton delete_btn;
     private javax.persistence.EntityManager entityManager;
     private javax.swing.JLabel entryTime_lbl;
