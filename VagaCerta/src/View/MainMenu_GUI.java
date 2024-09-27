@@ -16,6 +16,7 @@ public class MainMenu_GUI extends javax.swing.JFrame {
      */
     public MainMenu_GUI() {
         initComponents();
+        Model.CRUD_DAO.refresh();
     }
 
     /**
@@ -26,7 +27,11 @@ public class MainMenu_GUI extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
+        entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("PARKINGLOT?zeroDateTimeBehavior=convertToNullPU").createEntityManager();
+        vehicleQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT v FROM Vehicle v");
+        vehicleList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : vehicleQuery.getResultList();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         clean_btn2 = new javax.swing.JButton();
@@ -47,8 +52,8 @@ public class MainMenu_GUI extends javax.swing.JFrame {
         update_btn = new javax.swing.JButton();
         delete_btn = new javax.swing.JButton();
         consult_btn = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        dados = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         entryTime_lbl = new javax.swing.JLabel();
         color_lbl = new javax.swing.JLabel();
         model_lbl = new javax.swing.JLabel();
@@ -219,18 +224,25 @@ public class MainMenu_GUI extends javax.swing.JFrame {
         jPanel1.add(consult_btn);
         consult_btn.setBounds(30, 390, 140, 30);
 
-        dados.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, vehicleList, jTable1);
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${licensePlate}"));
+        columnBinding.setColumnName("Placa");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${brand}"));
+        columnBinding.setColumnName("Marca");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${model}"));
+        columnBinding.setColumnName("Modelo");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${color}"));
+        columnBinding.setColumnName("Cor");
+        columnBinding.setColumnClass(String.class);
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
+        jScrollPane2.setViewportView(jTable1);
 
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane1.setViewportView(dados);
-
-        jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 70, 480, 110);
+        jPanel1.add(jScrollPane2);
+        jScrollPane2.setBounds(10, 70, 480, 110);
 
         entryTime_lbl.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         entryTime_lbl.setForeground(new java.awt.Color(255, 255, 255));
@@ -399,6 +411,8 @@ public class MainMenu_GUI extends javax.swing.JFrame {
 
         jTabbedPane1.getAccessibleContext().setAccessibleName("FECHAR TICKET");
 
+        bindingGroup.bind();
+
         setSize(new java.awt.Dimension(500, 500));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -418,7 +432,13 @@ public class MainMenu_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_consult_btnActionPerformed
 
     private void update_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_btnActionPerformed
-        // TODO add your handling code here:
+        String licensePlate = licensePlate_txt1.getText();
+        String brand = brand_txt1.getText();
+        String model = model_txt1.getText();
+        String color = color_txt1.getText();
+        String entryTime = entryTime_txt1.getText();
+
+        Model.CRUD_DAO.update(licensePlate, brand, model, color, entryTime);
     }//GEN-LAST:event_update_btnActionPerformed
 
     private void clean_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clean_btnActionPerformed
@@ -509,8 +529,8 @@ public class MainMenu_GUI extends javax.swing.JFrame {
     public static javax.swing.JTextField color_txt;
     public static javax.swing.JTextField color_txt1;
     public static javax.swing.JButton consult_btn;
-    public static javax.swing.JTable dados;
     public static javax.swing.JButton delete_btn;
+    private javax.persistence.EntityManager entityManager;
     private javax.swing.JLabel entryTime_lbl;
     private javax.swing.JLabel entryTime_lbl1;
     private javax.swing.JLabel entryTime_lbl2;
@@ -525,8 +545,9 @@ public class MainMenu_GUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    public static javax.swing.JTable jTable1;
     private javax.swing.JLabel licensePlate_lbl;
     private javax.swing.JLabel licensePlate_lbl1;
     private javax.swing.JLabel licensePlate_lbl2;
@@ -541,5 +562,8 @@ public class MainMenu_GUI extends javax.swing.JFrame {
     public static javax.swing.JTextField price_txt;
     public static javax.swing.JButton send_btn;
     public static javax.swing.JButton update_btn;
+    private java.util.List<View.Vehicle> vehicleList;
+    private javax.persistence.Query vehicleQuery;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

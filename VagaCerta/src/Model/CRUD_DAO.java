@@ -5,10 +5,13 @@ import com.mysql.jdbc.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class CRUD_DAO {
 
@@ -36,6 +39,7 @@ public class CRUD_DAO {
                     PreparedStatement insert = (PreparedStatement) con.prepareStatement(sql);
                     insert.execute(); // Executando a inserção 
                     JOptionPane.showMessageDialog(null, "\nInserção realizada com sucesso!\n", "", -1);
+                    refresh();
                     Model.Funcs_DAO.cleanCreateFields();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "\nErro na inserção!", "ERRO!", 0);
@@ -84,6 +88,7 @@ public class CRUD_DAO {
                         pstmtDelete.execute();
 
                         JOptionPane.showMessageDialog(null, "Ticket finalizado com sucesso!\nCarro de placa: " + licensePlate + " acaba de ser deletado do banco.", "", -1);
+                        refresh();
                         //Model.Funcs_DAO.cleanCloseTicketFields(); Decidi tirar pois se o usuario pressiona OK sem querer, nao consegue jamais ver aqueles campos se perder o txt
 
                     } else {
@@ -150,10 +155,10 @@ public class CRUD_DAO {
     }
 
     public static void delete(String licensePlate) {
-        if (!licensePlate.equals("")){    
+        if (!licensePlate.equals("")) {
             Connection con = null;
             try {
-                con = (Connection) DriverManager.getConnection(url, username, password);  
+                con = (Connection) DriverManager.getConnection(url, username, password);
             } catch (SQLException ex) {
                 Logger.getLogger(MainMenu_GUI.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -163,18 +168,89 @@ public class CRUD_DAO {
                 PreparedStatement pstmtDelete = (PreparedStatement) con.prepareStatement(sqlDelete);
                 pstmtDelete.setString(1, licensePlate);
                 int rowsAffected = pstmtDelete.executeUpdate(); //executeUpdate para saber se houveram linhas afetadas pelo comando.
-                
+
                 if (rowsAffected > 0) {
                     JOptionPane.showMessageDialog(null, "Carro de placa: " + licensePlate + " deletado com sucesso!");
+                    refresh();
                 } else {
                     JOptionPane.showMessageDialog(null, "Placa: " + licensePlate + " inexistente...\nVerifique as informacoes!");
                 }
-                
+
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Erro ao excluir dados!");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Placa nao inserida!");
         }
+    }
+
+    public static void update(String licensePlate, String brand, String model, String color, String entryTime) {
+        try (java.sql.Connection con = DriverManager.getConnection(url, username, password);
+                PreparedStatement pstmt = con.prepareStatement("UPDATE VEHICLE SET brand=?, model=?, color=?, entry_time=? WHERE license_plate=?")) {
+            pstmt.setString(1, brand);
+            pstmt.setString(2, model);
+            pstmt.setString(3, color);
+            pstmt.setString(4, entryTime);
+            pstmt.setString(5, licensePlate);
+
+            int rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                JOptionPane.showMessageDialog(null, "Veículo atualizado com sucesso!");
+                refresh();
+            } else {
+                JOptionPane.showMessageDialog(null, "Placa não encontrada!");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao alterar dados!");
+        }
+        if (licensePlate.isEmpty() || brand.isEmpty() || model.isEmpty() || color.isEmpty() || entryTime.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+    }
+
+    public static DefaultTableModel Vehicle(ResultSet rs) {
+        try {
+            ResultSetMetaData metaData = rs.getMetaData();
+            int numberOfColumns = metaData.getColumnCount();
+            Vector columnNames = new Vector();
+            // AS LINHAS ABAIXO SÃO REFERENTES AOS CAMPOS DA TABELA Vehicle
+            columnNames.addElement("Placa");
+            columnNames.addElement("Marca");
+            columnNames.addElement("Modelo");
+            columnNames.addElement("Cor");
+            columnNames.addElement("Hor. Entrada");
+            Vector rows = new Vector();
+            while (rs.next()) {
+                Vector newRow = new Vector();
+                for (int i = 1; i <= numberOfColumns; i++) {
+                    newRow.addElement(rs.getObject(i));
+                }
+                rows.addElement(newRow);
+            }
+            return new DefaultTableModel(rows, columnNames);
+        } catch (Exception e) {
+
+            return null;
+        }
+    }
+
+    public static void refresh() {
+        Controller.Connect_DB.loadDriver();
+
+        try {
+            Connection conn;
+            conn = (Connection) DriverManager.getConnection(url, username, password);
+
+            String sql = "SELECT * FROM VEHICLE;";
+            PreparedStatement pst = (PreparedStatement) conn.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            View.MainMenu_GUI.jTable1.setModel(Vehicle(rs));
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+
     }
 }

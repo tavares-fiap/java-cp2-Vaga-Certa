@@ -1,0 +1,7 @@
+Placa: ABC1234
+Marca: AAA
+Modelo: AAA
+Cor: AAA
+Horário de entrada: 12:00:00
+Horário de saída: 13:00:00
+Preço final: R$ 15.0
